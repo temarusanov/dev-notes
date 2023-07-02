@@ -10,14 +10,27 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Techniques',
+      label: 'Workspace',
       link: {
         type: 'generated-index',
-        description: 'Learn about the most important backend techniques!',
-        slug: '/techniques',
-        keywords: ['techniques'],
+        description: 'Learn about workspace techniques',
+        slug: '/workspace',
+        keywords: ['workspace', 'nx', 'boilerplate'],
       },
-      items: ['techniques/dependency-injection', 'techniques/health-checks'],
+      items: [
+        'workspace/getting-started', 
+        {
+          type: 'category',
+          label: 'Techniques',
+          link: {
+            type: 'generated-index',
+            description: 'Learn about workspace techniques',
+            slug: '/workspace/techniques',
+            keywords: ['workspace', 'nx', 'boilerplate'],
+          },
+          items: ['workspace/techniques/dependency-injection', 'workspace/techniques/health-checks']
+        },
+        ],
     },
     // {
     //   type: 'category',

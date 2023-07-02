@@ -63,12 +63,12 @@ Let's take a look to this structure
 
 ```
 apps/
-  api/
+  api/                     <---- microservice
   api-e2e/
 libs/
   core/                    <---- grouping folder
-    prisma-client/         <---- core database library
-    errors/                <---- core library
+    common/                <---- common project library
+    health-checks/         <---- health check library
   feature1/                <---- feature library
   feature2/                <---- feature library
 ```
