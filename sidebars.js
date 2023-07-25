@@ -13,12 +13,13 @@ const sidebars = {
       label: 'Workspace',
       link: {
         type: 'generated-index',
-        description: 'Learn about workspace techniques',
+        description: 'Learn about my open-source boilerplate',
         slug: '/workspace',
         keywords: ['workspace', 'nx', 'boilerplate'],
       },
       items: [
-        'workspace/getting-started', 
+        'workspace/getting-started',
+        'workspace/installation',  
         {
           type: 'category',
           label: 'Techniques',

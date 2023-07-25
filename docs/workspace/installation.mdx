@@ -1,0 +1,47 @@
+---
+id: installation
+sidebar_position: 2
+---
+
+# Installation
+
+:::caution
+
+My plan to create command like `npx create-tema-workspace` that will automatically clone project and do all necessary stuff.
+But for now, you need to do all manually.
+
+:::
+
+
+
+### Clone project from Github
+
+```bash
+git clone https://github.com/temarusanov/nx
+```
+
+### Remove external libraries. 
+
+:::info
+Workspace contains all my external libraries (`libs/external`) that were published to npm registry. 
+You don't need them, because they had already been installed in this workspace, so feel free to delete this directory
+:::
+
+```bash
+rm -rf libs/external
+```
+
+### Change Nx cloud access token
+
+
+```json title="nx.json"
+"tasksRunnerOptions": {
+    "default": {
+        "runner": "nx-cloud",
+        "options": {
+            "accessToken": "your-token-here"
+        }
+    }
+}
+```
+
