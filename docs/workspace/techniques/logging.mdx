@@ -77,7 +77,6 @@ logger.log(`I will not log :(`, { label: 'database' })
 
 
 :::tip
-
 Json logs are useful to push logs in Loki or Elastic and make flexible queries
 :::
 
@@ -99,7 +98,6 @@ logger.configure({
 {"timestamp":"2022-10-10T12:39:40.023Z","message":"I will log","level":"log","label":"users"}
 {"timestamp":"2022-10-10T12:39:40.024Z","message":"I will log too","level":"log","label":"auth.debug"}
 {"timestamp":"2022-10-10T12:39:42.024Z","message":"Function take 2002.041 ms to execute","level":"timer"}
-
 ```
 
 ### Labels
@@ -137,11 +135,11 @@ const logger = new Logardian()
 logger.configure({
     colors: {
         timestamp: '#ABC'
-        traceId: '#CCC
-        label: '#FFFFFF
-        message: '#FFFFFF
-        trace: '#FFFFFF
-        stack: '#000000
+        traceId: '#CCC'
+        label: '#FFFFFF'
+        message: '#FFFFFF'
+        trace: '#FFFFFF'
+        stack: '#000000'
     }
 })
 ```
