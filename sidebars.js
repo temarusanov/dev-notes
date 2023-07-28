@@ -19,7 +19,7 @@ const sidebars = {
       },
       items: [
         'workspace/getting-started',
-        'workspace/installation',  
+        'workspace/installation',
         {
           type: 'category',
           label: 'Techniques',
@@ -29,9 +29,9 @@ const sidebars = {
             slug: '/workspace/techniques',
             keywords: ['workspace', 'nx', 'boilerplate'],
           },
-          items: ['workspace/techniques/dependency-injection', 'workspace/techniques/health-checks', 'workspace/techniques/logging']
+          items: ['workspace/techniques/dependency-injection', 'workspace/techniques/health-checks', 'workspace/techniques/logging', 'workspace/techniques/nats']
         },
-        ],
+      ],
     },
     // {
     //   type: 'category',

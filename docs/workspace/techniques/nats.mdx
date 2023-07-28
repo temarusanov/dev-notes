@@ -1,0 +1,171 @@
+---
+id: nats
+sidebar_position: 4
+---
+
+# NATS
+
+Page describes how to use NATS in NestJS
+
+## Problem
+
+NestJS does not provide full NATS support in their framework.
+
+## Solution
+
+Let's create our own :)
+
+Install `@tematools/nats` library
+
+```bash
+npm i --save @tematools/nats
+```
+    
+### Features
+
+- Built above [nats.js](https://github.com/nats-io/nats.js)
+- Nats Core support
+- Nats JetStream support
+- Decorators (ex. @Consume, @Reply)
+
+  
+### Usage/Examples
+
+Import NatsModule in your AppModule
+
+:::info
+NatsModule is a global module.
+:::
+
+```ts title="app.module.ts"
+import { NatsModule } from '@tematools/nats'
+import { HealthChecksModule } from '@tematools/health-checks'
+import * as env from 'env-var'
+
+@Module({
+    imports: [
+        HealthChecksModule, // (optional) import HealthChecksModule to get NATS health status
+        NatsModule.forRoot({
+            servers: env.get('NATS_URL').required().asString(),
+            /* all nats.js options here */
+        }),
+    ]
+})
+export class AppModule {}
+```
+
+After that, you can use NATS client services in your modules. 
+
+
+### Nats Request/Reply
+
+:::tip
+Inject `NatsClientService` for access to NATS Core features. Use `@Controller()` class decorator for `@Reply()` method decorator
+:::
+
+```ts title="cat.controler.ts"
+import { Controller } from '@nestjs/common'
+import {
+    NatsClientService,
+    Reply,
+    ReplyPayload,
+    ReplyResponse,
+} from '@tematools/nats'
+
+@Controller()
+export class CatController {
+    constructor(
+        private readonly natsClient: NatsClientService,
+    ) {}
+
+    async onApplicationBootstrap() {
+        // request ping 
+        await this.natsClient.request('ping', { text: 'hello' })
+    }
+
+    // Reply for ping request
+    @Reply('ping')
+    async ping(payload: ReplyPayload<any>): Promise<ReplyResponse<string>> {
+        const response = `pong with message ${JSON.stringify(payload.data)}`
+
+        const responseHeaders = {
+            ping: 'pong',
+        }
+
+        return {
+            data: response,
+            headers: responseHeaders,
+        }
+    }
+}
+
+```
+
+### JetStream Publish/Subscribe
+
+:::tip
+Inject `NatsJetStreamClientService` for access to NATS JetStream features.  Use `@Controller()` class decorator for `@Consume()` method decorator
+:::
+
+```ts title="cat.controller.ts"
+import { Controller, OnModuleInit } from '@nestjs/common'
+import {
+    Consume,
+    ConsumePayload,
+    ConsumerAcks,
+    NatsJetStreamClientService,
+    PublishOptions,
+} from '@tematools/nats'
+import { AckPolicy, PubAck, RetentionPolicy, StorageType } from 'nats'
+
+@Controller()
+export class CatController {
+    constructor(
+        private readonly natsJetStreamClient: NatsJetStreamClientService,
+    ) {}
+
+    // create stream
+    async onApplicationBootstrap() {
+        await this.natsJetStreamClient.createStream({
+            autoupdate: true,
+            name: 'stream_name',
+            retention: RetentionPolicy.Limits,
+            storage: StorageType.File,
+            subjects: Object.values(SampleNatsJetStreamSubjectsEnum),
+        })
+
+        // publish a message
+        await this.natsJetStreamClient.publish('ping', 'pong', { timeout: 5000 })
+    }
+
+    // consume message from stream
+    @Consume({
+        stream: 'stream_name',
+        consumer: {
+            durable_name: 'sample-consumer',
+            filter_subject: 'ping',
+            ack_policy: AckPolicy.All,
+        }
+    })
+    async consumePing(payload: ConsumePayload<any>, acks: ConsumerAcks) {
+        try {
+            // do logic here
+            acks.ack()
+        } catch (error) {
+            console.error(error)
+            acks.nack()
+        }
+    }
+}
+```
+
+
+## Source code
+
+:::tip
+
+[Don't trust, verify!](https://github.com/temarusanov/nx/tree/main/libs/external/nats)
+
+:::
+
+  
