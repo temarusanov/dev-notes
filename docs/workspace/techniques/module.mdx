@@ -14,7 +14,6 @@ A typical developer mistake is to describe modules around an entity in a databas
 A bunch of relationships are created between your entities and, accordingly, between modules.
 Maintaining spaghetti code becomes problematic
 
-
 On this page I will share my vision of how the module should look like so that 
 it can be easily reused and maintained in different projects.
 
@@ -93,7 +92,7 @@ export class AppModule {}
 
 ## Link your features in the integration layer
 
-If we can’t connect features with each other directly, 
+If we can't connect features with each other directly, 
 then how can we connect the application logic together? For example, if user registered (AuthModule), 
 we need to create a plan for him, the logic of which is implemented in another library (PlanModule).
 
@@ -158,7 +157,7 @@ And inject `AuthConfigIntegration` in your AuthModule `.forRootAsync()` function
 
 :::caution
 
-For now, I don't have `.forRootAsync()` function in my libraries. But you can find docs about that in 
+For now, I don't have `.forRootAsync()` function in my workspace. But you can find docs about that in 
 [NestJS](https://docs.nestjs.com/fundamentals/dynamic-modules)
 
 :::
@@ -178,7 +177,7 @@ export class AuthService {
     async signUp() {
         // some sign up logic here
 
-        await this.authEventStream.publish({
+        await this.authEventService.publish({
             pattern: 'USER_REGISTERED',
             data: user
         })
