@@ -29,7 +29,7 @@ const sidebars = {
             slug: '/workspace/techniques',
             keywords: ['workspace', 'nx', 'boilerplate'],
           },
-          items: ['workspace/techniques/dependency-injection', 'workspace/techniques/health-checks', 'workspace/techniques/logging', 'workspace/techniques/nats']
+          items: ['workspace/techniques/dependency-injection', 'workspace/techniques/module', 'workspace/techniques/health-checks', 'workspace/techniques/logging', 'workspace/techniques/nats']
         },
       ],
     },
