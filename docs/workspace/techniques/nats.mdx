@@ -26,6 +26,7 @@ npm i --save @tematools/nats
 - Built above [nats.js](https://github.com/nats-io/nats.js)
 - Nats Core support
 - Nats JetStream support
+- Multi-connections
 - Decorators (ex. @Consume, @Reply)
 
   
@@ -46,8 +47,13 @@ import * as env from 'env-var'
     imports: [
         HealthChecksModule, // (optional) import HealthChecksModule to get NATS health status
         NatsModule.forRoot({
-            servers: env.get('NATS_URL').required().asString(),
-            /* all nats.js options here */
+            connections: [
+                {
+                    connectionName: 'main-nats' // optional
+                    servers: env.get('NATS_URL').required().asString(),
+                    /* all nats.js options here */
+                }
+            ]
         }),
     ]
 })
@@ -157,6 +163,78 @@ export class CatController {
         }
     }
 }
+```
+
+### Multi-connections
+
+Multi-connections allows you to connect to multiple NATS connection (it's not about clusters).
+For example, you have 2 different applications that use different NATS instances. You can connect to them using `connections` option.
+
+```ts title="app.module.ts"
+import { NatsModule } from '@tematools/nats'
+import { HealthChecksModule } from '@tematools/health-checks'
+import * as env from 'env-var'
+
+@Module({
+    imports: [
+        HealthChecksModule, // (optional) import HealthChecksModule to get NATS health status
+        NatsModule.forRoot({
+            connections: [
+                {
+                    connectionName: '1-nats'
+                    servers: env.get('CAT_APP_NATS_URL').required().asString(),
+                    /* all nats.js options here */
+                },
+                {
+                    connectionName: '2-nats'
+                    servers: env.get('DOG_APP_NATS_URL').required().asString(),
+                    /* all nats.js options here */
+                }
+            ]
+        }),
+    ]
+})
+export class AppModule {}
+```
+
+Add optional `connectionName` option to Reply, Request, Consume, Publish methods
+
+```ts title="cat.controler.ts"
+import { Controller } from '@nestjs/common'
+import {
+    NatsClientService,
+    Reply,
+    ReplyPayload,
+    ReplyResponse,
+} from '@tematools/nats'
+
+@Controller()
+export class CatController {
+    constructor(
+        private readonly natsClient: NatsClientService,
+    ) {}
+
+    async onApplicationBootstrap() {
+        // request ping 
+        await this.natsClient.request('ping', { text: 'hello' }, {}, '1-nats') // <-- Use connection name here
+    }
+
+    // Reply for ping request
+    @Reply('ping', '1-nats') // <-- Use connection name here
+    async ping(payload: ReplyPayload<any>): Promise<ReplyResponse<string>> {
+        const response = `pong with message ${JSON.stringify(payload.data)}`
+
+        const responseHeaders = {
+            ping: 'pong',
+        }
+
+        return {
+            data: response,
+            headers: responseHeaders,
+        }
+    }
+}
+
 ```
 
 

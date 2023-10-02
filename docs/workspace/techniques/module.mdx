@@ -106,7 +106,7 @@ In order to link modules, there are two solutions
 
 ### Create an integration function in your config
 
-When writing a module that has its own config, implement the `onSignUp()`function in it 
+When writing a module that has its own config, implement the `onSignUp()` function in it 
 
 ```ts title="libs/auth/src/lib/configs/module.config.ts"
 export const AUTH_CONFIG = 'AUTH_CONFIG'
@@ -145,7 +145,7 @@ Then create an intergration service in your application (`/apps/my-application`)
 export class AuthConfigIntegration implements AuthConfig {
     constructor(
         private readonly planService: PlanService
-    )
+    ) {}
 
     async onSignUp(user: User) {
         await this.planService.createPlan(user.userId)
@@ -195,7 +195,7 @@ export class AuthConfigIntegration {
     constructor(
         private readonly planService: PlanService,
         private readonly authEventService: AuthEventStream
-    )
+    ) {}
 
     async onApplicationBootstrap() {
         this.authEventService.subscribe('USER_REGISTERED', (data) => {
