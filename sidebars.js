@@ -1,7 +1,6 @@
 // @ts-check
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  // By default, Docusaurus generates a sidebar from the docs folder structure
   docs: [
     {
       type: 'doc',
@@ -27,9 +26,9 @@ const sidebars = {
             type: 'generated-index',
             description: 'Learn about workspace techniques',
             slug: '/workspace/techniques',
-            keywords: ['workspace', 'nx', 'boilerplate'],
+            keywords: ['workspace', 'nx', 'boilerplate', 'nestjs', 'nodejs', 'gitlab'],
           },
-          items: ['workspace/techniques/dependency-injection', 'workspace/techniques/module', 'workspace/techniques/health-checks', 'workspace/techniques/logging', 'workspace/techniques/nats']
+          items: ['workspace/techniques/dependency-injection', 'workspace/techniques/module', 'workspace/techniques/git-tag-flow', 'workspace/techniques/health-checks', 'workspace/techniques/logging', 'workspace/techniques/nats']
         },
       ],
     },
