@@ -23,10 +23,10 @@ Do not terminate the application if the connection to internal services failed. 
 
 > A health check represents a summary of health indicators. A health indicator executes a check of a service, whether it is in a healthy or unhealthy state. A health check is positive if all the assigned health indicators are up and running.
 
-In this example, I'm using Prisma ORM and built indicator above prisma connection. First, install `@tematools/health-check` package
+In this example, I'm using Prisma ORM and built indicator above prisma connection. First, install `@tinybudgie/health-check` package
 
 ```bash
-npm i --save @tematools/health-checks
+npm i --save @tinybudgie/health-checks
 ```
 
 Create a health check indicator
@@ -36,7 +36,7 @@ import { Injectable } from '@nestjs/common'
 import {
     HealthIndicator,
     HealthIndicatorResult,
-} from '@tematools/health-checks'
+} from '@tinybudgie/health-checks'
 
 import { SamplePrismaService } from '../sample-services/sample-prisma.service'
 

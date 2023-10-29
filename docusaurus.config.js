@@ -6,20 +6,16 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'NX Docs',
-  tagline: 'NX useful libs and tools',
-  url: 'https://temarusanov.github.io',
-  baseUrl: '/dev-notes/',
+  title: 'Tiny Budgie docs',
+  tagline: 'TinyBudgie documentation',
+  url: 'https://tinybudgie.github.io',
+  baseUrl: '/docs/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'temarusanov', // Usually your GitHub org/user name.
-  projectName: 'dev-notes', // Usually your repo name.
+  organizationName: 'tinybudgie', // Usually your GitHub org/user name.
+  projectName: 'docs', // Usually your repo name.
   trailingSlash: false,
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
-  },
   presets: [
     [
       '@docusaurus/preset-classic',
@@ -38,7 +34,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'Tema docs',
+        title: 'Tiny Budgie docs',
         logo: {
           alt: 'Docs logo',
           src: 'img/logo.svg',
@@ -55,7 +51,7 @@ const config = {
             position: 'left',
           },
           {
-            href: 'https://github.com/temarusanov/dev-notes',
+            href: 'https://github.com/tinybudgie',
             label: 'GitHub',
             position: 'right',
           },

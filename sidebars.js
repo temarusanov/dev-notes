@@ -28,8 +28,21 @@ const sidebars = {
             slug: '/workspace/techniques',
             keywords: ['workspace', 'nx', 'boilerplate', 'nestjs', 'nodejs', 'gitlab'],
           },
-          items: ['workspace/techniques/dependency-injection', 'workspace/techniques/module', 'workspace/techniques/git-tag-flow', 'workspace/techniques/health-checks', 'workspace/techniques/logging', 'workspace/techniques/nats']
+          items: ['workspace/techniques/dependency-injection', 'workspace/techniques/module', 'workspace/techniques/git-tag-flow']
         },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Packages',
+      link: {
+        type: 'generated-index',
+        description: 'Learn about TB packages',
+        slug: '/packages',
+        keywords: ['packages', 'nats', 'nestjs'],
+      },
+      items: [
+        'packages/health-checks', 'packages/logging', 'packages/nats'
       ],
     },
     // {

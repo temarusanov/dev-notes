@@ -15,10 +15,10 @@ NestJS does not provide full NATS support in their framework.
 
 Let's create our own :)
 
-Install `@tematools/nats` library
+Install `@tinybudgie/nats` library
 
 ```bash
-npm i --save @tematools/nats
+npm i --save @tinybudgie/nats
 ```
     
 ### Features
@@ -39,8 +39,8 @@ NatsModule is a global module.
 :::
 
 ```ts title="app.module.ts"
-import { NatsModule } from '@tematools/nats'
-import { HealthChecksModule } from '@tematools/health-checks'
+import { NatsModule } from '@tinybudgie/nats'
+import { HealthChecksModule } from '@tinybudgie/health-checks'
 import * as env from 'env-var'
 
 @Module({
@@ -76,7 +76,7 @@ import {
     Reply,
     ReplyPayload,
     ReplyResponse,
-} from '@tematools/nats'
+} from '@tinybudgie/nats'
 
 @Controller()
 export class CatController {
@@ -121,7 +121,7 @@ import {
     ConsumerAcks,
     NatsJetStreamClientService,
     PublishOptions,
-} from '@tematools/nats'
+} from '@tinybudgie/nats'
 import { AckPolicy, PubAck, RetentionPolicy, StorageType } from 'nats'
 
 @Controller()
@@ -171,8 +171,8 @@ Multi-connections allows you to connect to multiple NATS connection (it's not ab
 For example, you have 2 different applications that use different NATS instances. You can connect to them using `connections` option.
 
 ```ts title="app.module.ts"
-import { NatsModule } from '@tematools/nats'
-import { HealthChecksModule } from '@tematools/health-checks'
+import { NatsModule } from '@tinybudgie/nats'
+import { HealthChecksModule } from '@tinybudgie/health-checks'
 import * as env from 'env-var'
 
 @Module({
@@ -206,7 +206,7 @@ import {
     Reply,
     ReplyPayload,
     ReplyResponse,
-} from '@tematools/nats'
+} from '@tinybudgie/nats'
 
 @Controller()
 export class CatController {

@@ -1,3 +1,3 @@
-# Tema dev notes
+# Tiny Budgie documentation
 
-Checkout it here: https://temarusanov.github.io/dev-notes/
+Checkout it here: https://tinybudgie.github.io/docs/
